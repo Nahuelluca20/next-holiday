@@ -1,4 +1,4 @@
-import {Stack, Text} from "@chakra-ui/react";
+import {Flex, Heading} from "@chakra-ui/react";
 
 import {HOLIDAYS} from "./data";
 import {Card} from "./components/Card";
@@ -17,15 +17,15 @@ const nextHoliday = HOLIDAYS.filter((holiday) => holiday.date > today).sort(
 const msDiff = nextHoliday.date.getTime() - today.getTime();
 const dayDiff = Math.ceil(msDiff / (1000 * 60 * 60 * 24)); // Utilizar Math.ceil para redondear hacia arriba
 
-const relativeTimeFormat = new Intl.RelativeTimeFormat("es-AR", {numeric: "auto"});
-
 function App() {
   return (
     <main>
-      <Text fontSize={"2xl"}>
-        El próximo feriado ({nextHoliday.name}) es {relativeTimeFormat.format(dayDiff, "days")}
-      </Text>
-      <Card />
+      <Heading mt={"40px"} textAlign={"center"}>
+        ¿Cuando es el próximo feriado?
+      </Heading>
+      <Flex justifyContent={"center"} width={"100%"}>
+        <Card dayDiff={dayDiff} nextHolidayName={nextHoliday.name} />
+      </Flex>
     </main>
   );
 }
